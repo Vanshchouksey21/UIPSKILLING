@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const Table = () => {
     const [data , Setdata] = useState([]);
-    const [sort, SetSort] = useState("asc");
+    const [sort, SetSort] = useState("a");
     
 
 
@@ -21,7 +21,7 @@ const Table = () => {
     const sorting = (key) =>
     {
         const sorted = [...data].sort((a , b) =>{
-            if(sort === "asc"){
+            if(sort === "a"){
                 return a[key] > b[key] ? 1 : -1 ;
 
             }
@@ -32,7 +32,7 @@ const Table = () => {
         })
         
         Setdata(sorted);
-        SetSort(sort === "asc" ? "desc" : "asc");
+        SetSort(sort === "a" ? "desc" : "a");
 
 
     }
@@ -58,8 +58,31 @@ const Table = () => {
    
 
   return (
-    <div>
-        <button  onClick={()=>sorting("price")}>Sort data</button>
+    <div
+        style={{
+            
+            padding: "20px",
+            gap : "20px",
+            border: "1px solid #ccc",
+            borderRadius: "10px"
+        }}>
+        <button 
+        style={{marginRight:"10px",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            backgroundColor: "#4CAF50",
+            marginBottom: "20px",
+            color: "white",
+            fontSize: "16px",
+            transition: "background-color 0.3s ease",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+            
+        }}
+        
+        onClick={()=>sorting("price")}>Sort By Price </button>
+
         <table border="1" cellPadding="10" cellSpacing="0">
             <thead>
             <tr>

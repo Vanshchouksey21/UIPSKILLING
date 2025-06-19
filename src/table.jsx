@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const Table = () => {
     const [data , Setdata] = useState([]);
-    const [sort, SetSort] = useState("a");
-    
+    const [sort, SetSort] = useState("asc");
+    const [cart, SetCart] = useState([]);
 
 
     const ld =async() =>{
@@ -21,7 +21,7 @@ const Table = () => {
     const sorting = (key) =>
     {
         const sorted = [...data].sort((a , b) =>{
-            if(sort === "a"){
+            if(sort === "asc"){
                 return a[key] > b[key] ? 1 : -1 ;
 
             }
@@ -32,7 +32,7 @@ const Table = () => {
         })
         
         Setdata(sorted);
-        SetSort(sort === "a" ? "desc" : "a");
+        SetSort(sort === "asc" ? "desc" : "asc");
 
 
     }
@@ -47,7 +47,17 @@ const Table = () => {
             <td>{item.serialId}</td>
             <td>{item.size}</td>
             <td>
-                <button>
+                <button
+                style={{
+                    padding: "10px 20px",
+                    border: "none",
+                }}
+                onClick={() => {
+                    alert(`Added ${item.productName} to cart`);
+                    SetCart([...cart, item]);
+                    console.log(cart); 
+                }}
+                >
                     Add to Cart 
                 </button>
             </td>
@@ -55,6 +65,17 @@ const Table = () => {
         )
     })
 
+    const cartItems = cart.map((item) => ({
+        brandName: item.brandName,
+        color: item.color,
+        price: item.price,
+        productName: item.productName,
+        serialId: item.serialId,
+        size: item.size
+
+    })
+
+)
    
 
   return (
@@ -78,7 +99,7 @@ const Table = () => {
             fontSize: "16px",
             transition: "background-color 0.3s ease",
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
-            
+
         }}
         
         onClick={()=>sorting("price")}>Sort By Price </button>
@@ -99,6 +120,39 @@ const Table = () => {
             {ans}
             </tbody>
         </table>
+
+
+
+        <div style={{marginTop: "20px",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "10px",
+            backgroundColor: "#f9f9f9",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+        }}>
+            <h3>Cart </h3>
+            <ul>
+
+
+                     {cartItems.map((item) => (
+    <li 
+    style={{
+        padding: "10px",
+        border: "1px solid #ccc",
+        borderRadius: "5px",
+        marginBottom: "10px"
+        }}>
+
+      {item.productName} - ₹{item.price} ({item.brandName})
+  
+
+                </li>
+                ))}
+            </ul>
+          
+            
+
+            </div>
        
     </div>
     

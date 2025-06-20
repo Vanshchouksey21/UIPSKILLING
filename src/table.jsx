@@ -135,13 +135,7 @@ const Table = () => {
 
 
                      {cartItems.map((item) => (
-    <li 
-    style={{
-        padding: "10px",
-        border: "1px solid #ccc",
-        borderRadius: "5px",
-        marginBottom: "10px"
-        }}>
+    <li>
 
       {item.productName} - ₹{item.price} ({item.brandName})
   

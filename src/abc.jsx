@@ -94,7 +94,7 @@ const Abc = () => {
             display:"flex",
             justifyContent:"center"
         }}>
-            Clicked Data
+             Data
         </h1>
         <ul>
            
